@@ -15,6 +15,7 @@ class CreateTenantsTable extends Migration
     {
         Schema::create('tenants', function (Blueprint $table) {
             $table->increments('id');
+            $table->uuid('uuid');
             $table->string('name')->unique();
             $table->integer('status')->default('0');
             $table->string('email')->unique();
@@ -44,7 +45,6 @@ class CreateTenantsTable extends Migration
             $table->string('telefone3')->nullable();
             $table->string('whatsapp')->nullable();
             $table->string('skype')->nullable();
-            $table->string('email')->nullable();
             $table->string('email1')->nullable();
 
             /** Redes Sociais */

@@ -21,7 +21,54 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'email1',
         'password',
+        'remember_token',
+        'senha',
+        'genero',
+        'cpf',
+        'rg',
+        'rg_expedicao',
+        'nasc',
+        'naturalidade',
+        'estado_civil',
+        'avatar',
+        'profissao',
+        'renda',
+        'profissao_empresa',
+        'cep',
+        'rua',
+        'num',
+        'complemento',
+        'bairro',
+        'uf',
+        'cidade',
+        'telefone',
+        'celular',
+        'whatsapp',
+        'skype',
+        'facebook',
+        'twitter',
+        'instagram',
+        'linkedin',
+        'vimeo',
+        'youtube',
+        'fliccr',
+        'soundclound',
+        'snapchat',
+        'tipo_de_comunhao',
+        'nome_conjuje',
+        'genero_conjuje',
+        'cpf_conjuje',
+        'rg_conjuje',
+        'rg_expedicao_conjuje',
+        'nasc_conjuje',
+        'naturalidade_conjuje',
+        'admin',
+        'client',
+        'editor',
+        'superadmin',
+        'status',
     ];
 
     /**
@@ -29,10 +76,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token',];
 
     /**
      * The attributes that should be cast.
@@ -42,4 +86,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Relacionamentos
+     */
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
+    }
+
+     /**
+     * Scopes
+     */
+
+     /**
+     * Accerssors and Mutators
+     */
 }
