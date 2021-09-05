@@ -20,6 +20,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'tenant',
         'email',
         'email1',
         'password',
@@ -102,4 +103,85 @@ class User extends Authenticatable
      /**
      * Accerssors and Mutators
      */
+    
+    public function setPasswordAttribute($value)
+    {
+        if (empty($value)) {
+            unset($this->attributes['password']);
+            return;
+        }
+        $this->attributes['senha'] = $value;
+        $this->attributes['password'] = bcrypt($value);
+    } 
+    
+    public function setRememberTokenAttribute($value)
+    {
+        if (empty($value)) {
+            unset($this->attributes['remember_token']);
+            return;
+        }
+        $this->attributes['remember_token'] = bcrypt($value);
+    }
+
+    public function setCpfAttribute($value)
+    {
+        $this->attributes['cpf'] = (!empty($value) ? $this->clearField($value) : null);
+    }
+    
+    public function getCpfAttribute($value)
+    {
+        if (empty($value)) {
+            return null;
+        }
+
+        return
+            substr($value, 0, 3) . '.' .
+            substr($value, 3, 3) . '.' .
+            substr($value, 6, 3) . '-' .
+            substr($value, 9, 2);
+    }
+
+    public function setCpfconjujeAttribute($value)
+    {
+        $this->attributes['cpf_conjuje'] = (!empty($value) ? $this->clearField($value) : null);
+    }
+    
+    public function getCpfconjujeAttribute($value)
+    {
+        if (empty($value)) {
+            return null;
+        }
+
+        return
+            substr($value, 0, 3) . '.' .
+            substr($value, 3, 3) . '.' .
+            substr($value, 6, 3) . '-' .
+            substr($value, 9, 2);
+    }
+
+    private function convertStringToDouble(?string $param)
+    {
+        if (empty($param)) {
+            return null;
+        }
+
+        return str_replace(',', '.', str_replace('.', '', $param));
+    }
+    
+    private function convertStringToDate(?string $param)
+    {
+        if (empty($param)) {
+            return null;
+        }
+        list($day, $month, $year) = explode('/', $param);
+        return (new \DateTime($year . '-' . $month . '-' . $day))->format('Y-m-d');
+    }
+    
+    private function clearField(?string $param)
+    {
+        if (empty($param)) {
+            return null;
+        }
+        return str_replace(['.', '-', '/', '(', ')', ' '], '', $param);
+    }
 }

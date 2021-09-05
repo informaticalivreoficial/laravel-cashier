@@ -19,7 +19,7 @@ class CreateTenantsTable extends Migration
             $table->string('name')->unique();
             $table->integer('status')->default('0');
             $table->string('email')->unique();
-            $table->string('cnpj')->unique();
+            $table->string('cnpj')->default('0');
             $table->string('ie')->nullable();
             $table->string('dominio')->nullable();
             $table->string('template')->nullable();
