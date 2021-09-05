@@ -16,6 +16,7 @@ class Post extends Model
 
     protected $fillable = [
         'autor',
+        'tenant_id',
         'tipo',
         'titulo',
         'content',
@@ -29,4 +30,34 @@ class Post extends Model
         'thumb_legenda',
         'publish_at'
     ];
+
+    /**
+     * Scopes
+     */
+    public function scopePostson($query)
+    {
+        return $query->where('status', 1);
+    }
+    
+    public function scopePostsoff($query)
+    {
+        return $query->where('status', 0);
+    }
+
+      /**
+     * Relacionamentos
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'autor', 'id');
+    }
+    
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class, 'tenant_id', 'id');
+    }
+
+     /**
+     * Accerssors and Mutators
+     */
 }

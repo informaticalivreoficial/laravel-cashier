@@ -73,6 +73,11 @@ class Tenant extends Model
      */
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(User::class, 'tenant_id', 'id');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'tenant_id', 'id');
     }
 }

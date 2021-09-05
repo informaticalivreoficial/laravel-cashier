@@ -16,7 +16,7 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('autor');
-            $table->unsignedInteger('tenant');
+            $table->unsignedInteger('tenant_id');
             $table->string('tipo');
             $table->string('titulo');
             $table->text('content')->nullable();
@@ -34,7 +34,7 @@ class CreatePostsTable extends Migration
 
             $table->foreign('autor')->references('id')->on('users')->onDelete('CASCADE');
             $table->foreign('categoria')->references('id')->on('cat_posts')->onDelete('CASCADE');
-            $table->foreign('tenant')->references('id')->on('tenants')->onDelete('CASCADE');
+            $table->foreign('tenant_id')->references('id')->on('tenants')->onDelete('CASCADE');
         });
     }
 

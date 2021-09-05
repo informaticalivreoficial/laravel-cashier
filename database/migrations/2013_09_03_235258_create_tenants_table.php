@@ -26,9 +26,12 @@ class CreateTenantsTable extends Migration
 
             /** imagens */
             $table->string('logomarca')->nullable();
+            $table->string('logomarca_admin')->nullable();
+            $table->string('logomarca_footer')->nullable();
             $table->string('favicon')->nullable();
             $table->string('metaimg')->nullable();
             $table->string('imgheader')->nullable();
+            $table->string('marcadagua')->nullable();
 
             /** address */
             $table->string('cep')->nullable();
@@ -38,6 +41,12 @@ class CreateTenantsTable extends Migration
             $table->string('bairro')->nullable();
             $table->integer('uf')->nullable();
             $table->integer('cidade')->nullable();
+
+            /** smtp */
+            $table->string('smtp_host')->nullable();
+            $table->string('smtp_port')->nullable();
+            $table->string('smtp_user')->nullable();
+            $table->string('smtp_pass')->nullable();
 
             /** contact */
             $table->string('telefone1')->nullable();
@@ -62,6 +71,10 @@ class CreateTenantsTable extends Migration
             $table->text('descricao')->nullable();
             $table->text('mapa_google')->nullable();
             $table->text('metatags')->nullable();
+            $table->string('rss');
+            $table->date('rss_data')->nullable();
+            $table->string('sitemap');
+            $table->date('sitemap_data')->nullable();
 
             $table->timestamps();
         });

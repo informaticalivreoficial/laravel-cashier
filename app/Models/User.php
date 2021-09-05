@@ -20,7 +20,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'tenant',
+        'tenant_id',
         'email',
         'email1',
         'password',
@@ -93,7 +93,12 @@ class User extends Authenticatable
      */
     public function tenant()
     {
-        return $this->belongsTo(Tenant::class);
+        return $this->belongsTo(Tenant::class, 'tenant_id', 'id');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'user', 'id');
     }
 
      /**
