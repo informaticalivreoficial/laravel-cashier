@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Tenant\Traits\TenantTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -11,6 +12,7 @@ use Laravel\Cashier\Billable;
 
 class User extends Authenticatable
 {
+    use TenantTrait;
     use HasApiTokens, HasFactory, Notifiable, Billable;
 
     /**
@@ -70,7 +72,7 @@ class User extends Authenticatable
         'editor',
         'superadmin',
         'status',
-    ];
+    ];    
 
     /**
      * The attributes that should be hidden for serialization.
@@ -109,24 +111,24 @@ class User extends Authenticatable
      * Accerssors and Mutators
      */
     
-    public function setPasswordAttribute($value)
-    {
-        if (empty($value)) {
-            unset($this->attributes['password']);
-            return;
-        }
-        $this->attributes['senha'] = $value;
-        $this->attributes['password'] = bcrypt($value);
-    } 
+    // public function setPasswordAttribute($value)
+    // {
+    //     if (empty($value)) {
+    //         unset($this->attributes['password']);
+    //         return;
+    //     }
+    //     $this->attributes['senha'] = $value;
+    //     $this->attributes['password'] = bcrypt($value);
+    // } 
     
-    public function setRememberTokenAttribute($value)
-    {
-        if (empty($value)) {
-            unset($this->attributes['remember_token']);
-            return;
-        }
-        $this->attributes['remember_token'] = bcrypt($value);
-    }
+    // public function setRememberTokenAttribute($value)
+    // {
+    //     if (empty($value)) {
+    //         unset($this->attributes['remember_token']);
+    //         return;
+    //     }
+    //     $this->attributes['remember_token'] = bcrypt($value);
+    // }
 
     public function setCpfAttribute($value)
     {

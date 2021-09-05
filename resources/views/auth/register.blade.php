@@ -26,18 +26,18 @@
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
 
-            <!-- Email Address -->
+            
             <div class="mt-4">
                 <x-label for="cpf" :value="__('Cpf')" />
 
                 <x-input id="cpf" class="block mt-1 w-full" type="text" name="cpf" :value="old('cpf')" required />
             </div>
-
+<!-- Email Address 
             <div>
                 <x-label for="tenant" :value="__('Empresa')" />
 
                 <x-input id="tenant" class="block mt-1 w-full" type="text" name="tenant" :value="old('tenant')" required autofocus />
-            </div>
+            </div>-->
 
             <!-- Password -->
             <div class="mt-4">

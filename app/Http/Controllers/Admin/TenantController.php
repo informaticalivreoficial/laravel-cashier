@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Post;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class TenantController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,11 +13,8 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {        
-        $posts = Post::orderBy('status', 'ASC')->orderBy('created_at', 'DESC')->paginate(25);
-        return view('cms.artigos.index', [
-            'posts' => $posts,
-        ]);
+    {
+        return view('cms.tenants.index');
     }
 
     /**
@@ -27,7 +24,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('cms.artigos.create');
+        //
     }
 
     /**
@@ -38,8 +35,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //auth()->user()->posts()->create($request->all());
-        return redirect()->route('cms.artigos.edit');
+        //
     }
 
     /**

@@ -6,7 +6,7 @@ use App\Tenant\ManagerTenant;
 use Closure;
 use Illuminate\Http\Request;
 
-class TenantMiddleware
+class CheckDomainMaster
 {
     /**
      * Handle an incoming request.
@@ -17,20 +17,13 @@ class TenantMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $managerT = app(ManagerTenant::class);
-        $tenant = $managerT->tenant();
+        $managenT = app(ManagerTenant::class);
 
-        if(!$tenant && $request->url() != route('erro-404')){
-            return redirect()->route('erro-404');
+        if(!$managenT->isSubdomainMaster()){
+            abort(401, 'Acesso não autorizado!');
+            return;
         }
 
-        $this->setSession($tenant->only('name'));
-
         return $next($request);
-    }
-
-    public function setSession($tenant)
-    {
-        session()->put('tenant', $tenant);
     }
 }

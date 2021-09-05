@@ -26,4 +26,11 @@ class ManagerTenant
         $tenant = $this->tenant();
         return $tenant->id;
     }
+
+    public function isSubdomainMaster()
+    {
+        $subdomain = $this->subdomain();
+        $subdomainMaster = config('tenant.subdomain_master');
+        return $subdomain == $subdomainMaster;
+    }
 }
