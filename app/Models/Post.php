@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Tenant\Scopes\TenantScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File;
@@ -30,6 +31,13 @@ class Post extends Model
         'thumb_legenda',
         'publish_at'
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new TenantScope);
+    }
 
     /**
      * Scopes
