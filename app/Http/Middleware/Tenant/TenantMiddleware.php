@@ -22,9 +22,9 @@ class TenantMiddleware
 
         if(!$tenant && $request->url() != route('erro-404')){
             return redirect()->route('erro-404');
-        }
-
-        $this->setSession($tenant->only('name'));
+        }elseif($tenant){
+            $this->setSession($tenant->only(['name','uuid']));
+        }        
 
         return $next($request);
     }
